@@ -3,13 +3,13 @@ package main
 import "fmt"
 
 type StoryBook struct {
-	page string 
+	page     string
 	nextPage *StoryBook
 }
 
 func printStory(book *StoryBook) {
 	fmt.Println(book.page)
-	if(book.nextPage == nil) {
+	if book.nextPage == nil {
 		return
 	}
 	printStory(book.nextPage)
