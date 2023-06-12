@@ -1,6 +1,13 @@
+// TODO: 1) add a func that will add a new page
+// 2) add a func that will delete a page
+
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 type StoryBook struct {
 	page     string
@@ -10,9 +17,22 @@ type StoryBook struct {
 func printStory(book *StoryBook) {
 	fmt.Println(book.page)
 	if book.nextPage == nil {
-		return
+		fmt.Println("There are no more pages.")
+		fmt.Println("Would you like to add a new page? y/n")
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		response := scanner.Text()
+		if response == "y" {
+			addPage()
+		} else {
+			return
+		}
 	}
 	printStory(book.nextPage)
+}
+
+func addPage() {
+	
 }
 
 func main() {
@@ -22,5 +42,6 @@ func main() {
 	page1.nextPage = &page2
 	page2.nextPage = &page3
 
-	printStory(&page1)
+	// printStory(&page1)
+	
 }
