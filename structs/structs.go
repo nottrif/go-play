@@ -23,7 +23,7 @@ func printStory(book *StoryBook) {
 		scanner.Scan()
 		response := scanner.Text()
 		if response == "y" {
-			addPage()
+			addPage(book)
 		} else {
 			return
 		}
@@ -31,8 +31,17 @@ func printStory(book *StoryBook) {
 	printStory(book.nextPage)
 }
 
-func addPage() {
-	
+func addPage(book *StoryBook) {
+	fmt.Println("Add content for the page")
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	content := scanner.Text()
+	newPage := StoryBook{content, nil}
+	book.nextPage = &newPage
+}
+
+func deletePage() {
+
 }
 
 func main() {
@@ -42,6 +51,5 @@ func main() {
 	page1.nextPage = &page2
 	page2.nextPage = &page3
 
-	// printStory(&page1)
-	
+	printStory(&page1)
 }
